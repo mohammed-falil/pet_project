@@ -43,47 +43,6 @@ function CarView() {
     setIndex(selectedIndex);
   };
 
-  // const images = [
-  //   {
-  //     original:
-  //       "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/vitara-brezza-2022-exterior-right-front-three-quarter.jpeg?isig=0&q=75",
-  //     thumbnail:
-  //       "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/vitara-brezza-2022-exterior-right-front-three-quarter.jpeg?isig=0&q=75",
-  //   },
-  //   {
-  //     original:
-  //       "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/brezza-exterior-right-front-three-quarter-6.jpeg?isig=0&q=75",
-  //     thumbnail:
-  //       "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/brezza-exterior-right-front-three-quarter-6.jpeg?isig=0&q=75",
-  //   },
-  //   {
-  //     original:
-  //       "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/brezza-exterior-right-side-view.jpeg?isig=0&q=75",
-  //     thumbnail:
-  //       "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/brezza-exterior-right-side-view.jpeg?isig=0&q=75",
-  //   },
-
-  //   {
-  //     original:
-  //       "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/brezza-exterior-right-rear-three-quarter.jpeg?isig=0&q=75",
-  //     thumbnail:
-  //       "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/brezza-exterior-right-rear-three-quarter.jpeg?isig=0&q=75",
-  //   },
-
-  //   {
-  //     original:
-  //       "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/brezza-exterior-right-side-view.jpeg?isig=0&q=75",
-  //     thumbnail:
-  //       "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/brezza-exterior-right-side-view.jpeg?isig=0&q=75",
-  //   },
-  //   {
-  //     original:
-  //       "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/brezza-exterior-right-side-view.jpeg?isig=0&q=75",
-  //     thumbnail:
-  //       "https://imgd.aeplcdn.com/664x374/n/cw/ec/107543/brezza-exterior-right-side-view.jpeg?isig=0&q=75",
-  //   },
-  // ];
-
   const noImage = [
     {
       original:
@@ -144,7 +103,11 @@ function CarView() {
         </div>
         <div className="overview">
           <div className="image-gallery">
-            <Carousel activeIndex={index} onSelect={handleSelect} className="carsosel-gallery">
+            <Carousel
+              activeIndex={index}
+              onSelect={handleSelect}
+              className="carsosel-gallery"
+            >
               {imageUrl.map((item) => (
                 <Carousel.Item className="carosel-item">
                   <img

@@ -30,6 +30,8 @@ function NavigationBar() {
 
   const onClickDiv = (e, index) => {
     navigate("/user/view/" + searchItems[index].name);
+    setSearch(null);
+    setBorder({ borderRadius: "0.8rem 0rem 0rem 0.8rem" });
   };
 
   const onSearchListClick = (e) => {};
@@ -94,7 +96,7 @@ function NavigationBar() {
         <div className="logged-in-circle">
           <div className="name">
             <h6>Falil</h6>
-            </div>
+          </div>
           <div className="circle-div">
             <img src={circleDp} />
           </div>
