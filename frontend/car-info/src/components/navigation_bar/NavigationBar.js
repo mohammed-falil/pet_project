@@ -7,7 +7,6 @@ import circleDp from "../../assets/man-in-suit-and-tie.png";
 
 function NavigationBar() {
   const [searchItems, setSearchItems] = useState([]);
-
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [border, setBorder] = useState({
@@ -35,6 +34,14 @@ function NavigationBar() {
   };
 
   const onSearchListClick = (e) => {};
+
+  const btnOnClick = (event) => {
+    if (event.target.name === "login-btn") {
+      navigate("/login");
+    } else {
+      navigate("/signup");
+    }
+  };
 
   const searchUrl = "http://localhost:9090/user/search/";
 
@@ -106,8 +113,12 @@ function NavigationBar() {
         </div>
       ) : (
         <div className="login_signup">
-          <button className="login-btn">Login</button>
-          <button className="signup-btn">Signup</button>
+          <button className="login-btn" name="login-btn" onClick={btnOnClick}>
+            Login
+          </button>
+          <button className="signup-btn" name="signup-btn" onClick={btnOnClick}>
+            Signup
+          </button>
         </div>
       )}
 
