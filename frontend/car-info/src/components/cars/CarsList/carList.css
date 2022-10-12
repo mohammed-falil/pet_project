@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,100&family=Ubuntu:wght@300;400&display=swap");
+
+.car-img {
+  width: 150px;
+
+  height: 200px;
+}
+
+.image-div {
+  margin-right: 35px;
+}

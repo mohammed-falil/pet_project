@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CarService from "../CarService";
 import Spinner from "../spinner/Spinner";
+import "./carList.css";
 
 let CarList = () => {
-  let [query, setQuery] = useState({
-    text: "",
-  });
+  // let [query, setQuery] = useState({
+  //   text: "",
+  // });
 
   let [state, setState] = useState({
-    loading: false,
+    loading: true,
     cars: [],
     filteredCars: [],
     errorMessage: "",
@@ -17,15 +18,18 @@ let CarList = () => {
 
   useEffect(() => {
     async function fetchData() {
+      let jwtToken = sessionStorage.getItem("JWT");
       try {
         setState({ ...state, loading: true });
-        let response = await CarService.getAllCars();
+        let response = await CarService.getAllCars(jwtToken);
         setState({
           ...state,
           loading: false,
           cars: response.data,
-          filteredCars: response.data,
         });
+        // console.log("response data: ", response.data.allCarDetails);
+
+        // response.data.allCarDetails.map((car) => console.log(car));
       } catch (error) {
         setState({
           ...state,
@@ -65,17 +69,17 @@ let CarList = () => {
 
   //search cars
   let searchCars = (event) => {
-    setQuery({ ...query, text: event.target.value });
-    let theCars = state.cars.filter((car) => {
-      return car.name.toLowerCase().includes(event.target.value.toLowerCase());
-    });
-    setState({
-      ...state,
-      filteredCars: theCars,
-    });
+    // setQuery({ ...query, text: event.target.value });
+    // let theCars = state.cars.filter((car) => {
+    //   return car.name.toLowerCase().includes(event.target.value.toLowerCase());
+    // });
+    // setState({
+    //   ...state,
+    //   filteredCars: theCars,
+    // });
   };
 
-  let { loading, cars, filteredCars, errorMessage } = state;
+  let { loading, cars, errorMessage } = state;
   return (
     <>
       <section className="car-search p-3">
@@ -101,7 +105,7 @@ let CarList = () => {
                     <div className="mb-2">
                       <input
                         name="text"
-                        value={query.text}
+                        // value={query.text}
                         onChange={searchCars}
                         type="text"
                         className="form-control"
@@ -132,21 +136,21 @@ let CarList = () => {
           <section className="car-list">
             <div className="container">
               <div className="col">
-                {filteredCars.length > 0 &&
-                  filteredCars.map((car) => {
+                {cars.allCarDetails.length > 0 &&
+                  cars.allCarDetails.map((car) => {
                     return (
                       <div className="col-md-15" key={car.id}>
                         <div className="card my-2">
-                          <div className="card-body my-4">
+                          <div className="card-body my-7">
                             <div className="row align-items-center d-flex justify-content-around">
-                              <div className="col-md-3">
+                              <div className="col-md-3 image-div">
                                 <img
-                                  src={car.photo}
+                                  src={car.imageURL[0].imageUrl}
                                   alt="car1"
                                   className="car-img"
                                 ></img>
                               </div>
-                              <div className="col-md-5">
+                              <div className="col-md-5 detail-div">
                                 <ul className="list-group">
                                   <li className="list-group-item list-group-item-action">
                                     Name:{" "}
@@ -161,18 +165,18 @@ let CarList = () => {
                                   <li className="list-group-item list-group-item-action">
                                     Showroom Price:{" "}
                                     <span className="fw-bold">
-                                      {car.ShowroomPrice}
+                                      {car.showroomPrice + "L"}
                                     </span>
                                   </li>
                                   <li className="list-group-item list-group-item-action">
                                     Mileage:{" "}
                                     <span className="fw-bold">
-                                      {car.Mileage}
+                                      {car.mileage + " kmpl"}
                                     </span>
                                   </li>
                                 </ul>
                               </div>
-                              <div className="col-md-1 d-flex flex-column align-items-center">
+                              <div className="col-md-3 d-flex flex-column align-items-center">
                                 <Link
                                   to={`/cars/view/${car.id}`}
                                   className="btn btn-warning my-1"
@@ -180,7 +184,7 @@ let CarList = () => {
                                   <i className="fa fa-eye" />
                                 </Link>
                                 <Link
-                                  to={`/cars/edit/${car.id}`}
+                                  to={`/admin/edit-car/${car.name}`}
                                   className="btn btn-primary my-1"
                                 >
                                   <i className="fa fa-pen" />
@@ -206,4 +210,5 @@ let CarList = () => {
     </>
   );
 };
+
 export default CarList;

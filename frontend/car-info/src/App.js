@@ -10,6 +10,7 @@ import AddCar from "./components/cars/AddCar/AddCar";
 import CarList from "./components/cars/CarsList/CarList";
 import EditCar from "./components/cars/EditCar/EditCar";
 import ViewCar from "./components/cars/ViewCar/ViewCar";
+// import CarListCopy from "./components/cars/CarsList/CarListCopy";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/admin/add-car" element={<AddCar />} />
           <Route path="/admin/car-list" element={<CarList />} />
-          <Route path="/admin/edit-car" element={<EditCar />} />
+          <Route path="/admin/edit-car/:name" element={<EditCar />} />
           <Route path="/admin/view-car" element={<ViewCar />} />
         </Routes>
       </BrowserRouter>

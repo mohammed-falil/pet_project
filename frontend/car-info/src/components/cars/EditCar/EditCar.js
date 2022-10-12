@@ -31,26 +31,32 @@ let EditCar = () => {
     errorMessage: "",
   });
 
+  let { name } = useParams();
+
   useEffect(() => {
     async function fetchData() {
       try {
         setState({ ...state, loading: false });
-        let response = await CarService.getCar(carId);
-        let fuelResponse = await CarService.getFuelTypes();
-        let steeringResponse = await CarService.getPowerSteeringTypes();
-        let brakeResponse = await CarService.getBrakeSystemTypes();
-        let seatResponse = await CarService.getSeatingTypes();
-        let gearResponse = await CarService.getGearTypes();
+
+        let response = await CarService.getCar(name);
+        let carDetails = response.data.allCarDetails[0];
+        // let fuelResponse = await
+        // let steeringResponse = await CarService.getPowerSteeringTypes();
+        // let brakeResponse = await CarService.getBrakeSystemTypes();
+        // let seatResponse = await CarService.getSeatingTypes();
+        // let gearResponse = await CarService.getGearTypes();
+
         setState({
           ...state,
           loading: false,
           car: response.data,
-          fueltype: fuelResponse.data,
-          powersteering: steeringResponse.data,
-          brakesystem: brakeResponse.data,
-          seatingcapacity: seatResponse.data,
-          geartype: gearResponse.data,
+          fueltype: ["Petrol", "Diesel", "CNG", "Electric"],
+          powersteering: ["Yes", "No"],
+          brakesystem: ["ABS", "Drum"],
+          seatingcapacity: [2, 5, 8],
+          geartype: ["Automatic", "Manual"],
         });
+        console.log("carDetails : ", carDetails);
       } catch (error) {
         setState({
           ...state,
@@ -159,10 +165,10 @@ let EditCar = () => {
                       >
                         <option value="">Select Fuel Type</option>
                         {fueltype.length > 0 &&
-                          fueltype.map((ftype) => {
+                          fueltype.map((ftype, index) => {
                             return (
-                              <option key={ftype.id} value={ftype.id}>
-                                {ftype.name}
+                              <option key={index} value={ftype}>
+                                {ftype}
                               </option>
                             );
                           })}
