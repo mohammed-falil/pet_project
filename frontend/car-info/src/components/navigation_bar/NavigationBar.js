@@ -4,11 +4,12 @@ import logo from "../../assets/logo.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import circleDp from "../../assets/man-in-suit-and-tie.png";
+import jwt_decode from "jwt-decode";
 
 function NavigationBar() {
   const [searchItems, setSearchItems] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
-
+  const [nameFromJwt, setNameFromJwt] = useState("");
   const [border, setBorder] = useState({
     borderRadius: "0.8rem 0rem 0rem 0.8rem",
   });
@@ -51,6 +52,16 @@ function NavigationBar() {
       setSearchItems(e.data);
     });
   }, [search]);
+
+  useEffect(() => {
+    let jwt = sessionStorage.getItem("JWT");
+    console.log("inside useEffect");
+    if (jwt !== null) {
+      let decodedJwt = jwt_decode(jwt);
+      setNameFromJwt(decodedJwt.sub);
+      setLoggedIn(true);
+    }
+  }, [loggedIn]);
 
   return (
     <div className="nav_main">
@@ -102,7 +113,7 @@ function NavigationBar() {
       {loggedIn ? (
         <div className="logged-in-circle">
           <div className="name">
-            <h6>Falil</h6>
+            <h6>{nameFromJwt}</h6>
           </div>
           <div className="circle-div">
             <img src={circleDp} />

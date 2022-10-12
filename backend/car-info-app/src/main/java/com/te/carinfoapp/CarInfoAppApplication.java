@@ -79,8 +79,8 @@ public class CarInfoAppApplication {
             faqContainerList.add(faqContainer);
 
             FaqContainer faqContainer1 = new FaqContainer();
-            faqContainer.setQuestion("Which car is better Brezza or Venue?");
-            faqContainer.setAnswer("Brezza price starts at Rs 7.99 Lakh ex-showroom and Venue price starts Rs 7.53 Lakh ex-showroom. Compare these two models on the basis of their price, features & specs.");
+            faqContainer1.setQuestion("Which car is better Brezza or Venue?");
+            faqContainer1.setAnswer("Brezza price starts at Rs 7.99 Lakh ex-showroom and Venue price starts Rs 7.53 Lakh ex-showroom. Compare these two models on the basis of their price, features & specs.");
             faqContainerList.add(faqContainer1);
 
             FaqContainer faqContainer2 = new FaqContainer();
@@ -94,7 +94,7 @@ public class CarInfoAppApplication {
             faqContainerList.add(faqContainer3);
 
             FaqContainer faqContainer4 = new FaqContainer();
-            faqContainer3.setQuestion("What is the mileage of Maruti Brezza?");
+            faqContainer4.setQuestion("What is the mileage of Maruti Brezza?");
             faqContainer4.setAnswer("The ARAI mileage of Maruti Brezza is 20.15 kmpl.");
             faqContainerList.add(faqContainer4);
 
