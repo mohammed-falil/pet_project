@@ -9,6 +9,9 @@ let EditCar = () => {
   let { carId } = useParams();
 
   const [numOfPros, setNumOfPros] = useState(1);
+  const [numOfCons, setNumOfCons] = useState(1);
+  const [listOfImgs, setListOfImgs] = useState(1);
+  const [faqList, setFaqList] = useState(1);
 
   let [state, setState] = useState({
     loading: false,
@@ -24,6 +27,10 @@ let EditCar = () => {
       Mileage: "",
       SeatingCapacity: "",
       GearType: "",
+      Bhp:"",
+      BootSpace:"",
+      EngineCapacity:"",
+      video:""
     },
     fueltype: [],
     powersteering: [],
@@ -46,12 +53,7 @@ let EditCar = () => {
         setState({
           ...state,
           loading: false,
-          car: response.data,
-          fueltype: ["Petrol", "Diesel", "CNG", "Electric"],
-          powersteering: ["Yes", "No"],
-          brakesystem: ["ABS", "Drum"],
-          seatingcapacity: [2, 5, 8],
-          geartype: ["Automatic", "Manual"],
+          car: response.data
         });
         console.log("carDetails : ", carDetails);
       } catch (error) {
@@ -80,6 +82,12 @@ let EditCar = () => {
     let value = event.target.value;
     if (inputId === "pros-list") {
       setNumOfPros(value);
+    }else if(inputId==="cons-list"){
+          setNumOfCons(value);
+     }else if(inputId==="img-list"){
+      setListOfImgs(value);
+    }else if(inputId==="faq-list"){
+      setFaqList(value);
     }
   };
 
@@ -151,6 +159,18 @@ let EditCar = () => {
                       />
                     </div>
                     <div className="mb-2">
+                      <input
+                        required="true"
+                        name="video"
+                        value={car.video}
+                        onChange={updateInput}
+                        type="video"
+                        className="form-control"
+                        placeholder="video-url"
+                        
+                      />
+                    </div>
+                    <div className="mb-2">
                       <select
                         required="true"
                         name="FuelType"
@@ -158,15 +178,11 @@ let EditCar = () => {
                         onChange={updateInput}
                         className="form-control"
                       >
-                        <option value="">Select Fuel Type</option>
-                        {fueltype.length > 0 &&
-                          fueltype.map((ftype, index) => {
-                            return (
-                              <option key={index} value={ftype}>
-                                {ftype}
-                              </option>
-                            );
-                          })}
+                        <option value="" disabled selected>Select Fuel Type</option>
+                        <option value="Petrol">Petrol</option>
+                        <option value="Diesel">Diesel</option>
+                        <option value="CNG">CNG</option>
+                        <option value="Electric">Electric</option>
                       </select>
                     </div>
                     <div className="mb-2">
@@ -177,16 +193,10 @@ let EditCar = () => {
                         onChange={updateInput}
                         className="form-control"
                       >
-                        <option value="">Power Steering</option>
-                        {powersteering.length > 0 &&
-                          powersteering.map((psType, index) => {
-                            return (
-                              <option key={index} value={psType}>
-                                {psType}
-                              </option>
-                            );
-                          })}
-                      </select>
+                        <option value="" disabled selected>Power Steering</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        </select>
                     </div>
                     <div className="mb-2">
                       <select
@@ -196,15 +206,9 @@ let EditCar = () => {
                         onChange={updateInput}
                         className="form-control"
                       >
-                        <option value="">Break System</option>
-                        {brakesystem.length > 0 &&
-                          brakesystem.map((bsType, index) => {
-                            return (
-                              <option key={index} value={bsType}>
-                                {bsType}
-                              </option>
-                            );
-                          })}
+                        <option value="" disabled selected>Break System</option>
+                        <option value="ABS">ABS</option>
+                        <option value="Drum">Drum</option>
                       </select>
                     </div>
                     <div className="mb-2">
@@ -248,15 +252,10 @@ let EditCar = () => {
                         onChange={updateInput}
                         className="form-control"
                       >
-                        <option value="">Seating Capacity</option>
-                        {seatingcapacity.length > 0 &&
-                          seatingcapacity.map((scType, index) => {
-                            return (
-                              <option key={index} value={scType}>
-                                {scType}
-                              </option>
-                            );
-                          })}
+                        <option value="" disabled selected>Seating Capacity</option>
+                        <option value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="8">8</option>
                       </select>
                     </div>
                     <div className="mb-2">
@@ -267,15 +266,9 @@ let EditCar = () => {
                         onChange={updateInput}
                         className="form-control"
                       >
-                        <option value="">Gear Type</option>
-                        {geartype.length > 0 &&
-                          geartype.map((gtType, index) => {
-                            return (
-                              <option key={index} value={gtType}>
-                                {gtType}
-                              </option>
-                            );
-                          })}
+                        <option value="" disabled selected>Gear Type</option>
+                        <option value="Automatic">Automatic</option>
+                        <option value="Manual">Manual</option>
                       </select>
                     </div>
 
@@ -308,6 +301,108 @@ let EditCar = () => {
                         return rows;
                       })()}
                     </>
+
+                    <div className="mb-2 cons-tag">
+                      <p>Number of Cons:</p>
+                      <input
+                        type="number"
+                        className="form-control"
+                        required="true"
+                        id="cons-list"
+                        onChange={createInputBox}
+                      />
+                    </div>
+                    <>
+                      {(() => {
+                        let rows = [];
+                        for (let i = 0; i < numOfCons; i++) {
+                          rows.push(
+                            <div className="mb-2">
+                              <textarea
+                                key={i}
+                                type="text"
+                                className="form-control"
+                                required="true"
+                                placeholder={`Cons list ${i}`}
+                              />
+                            </div>
+                          );
+                        }
+                        return rows;
+                      })()}
+                      </>
+
+                      <div className="mb-2 img-tag">
+                        <p>List of Images:</p>
+                        <input 
+                        type="text"
+                        className="form-control"
+                        required="true"
+                        id="img-list"
+                        onChange={createInputBox}
+                        />
+                      </div>
+                      <>
+                      {(()=>{
+                        let rows=[];
+                        for(let i=0;i<listOfImgs;i++){
+                          rows.push(
+                            <div className="mb-2">
+                              <input
+                              key={i}
+                              type="text"
+                              className="form-control"
+                              required="true"
+                              placeholder={`Image List ${i}`}
+                              />
+                            </div>
+                          );
+                        }
+                        return rows;
+                      })()}
+                      </>
+
+                      <div className="mb-2 faq-tag">
+                        <p>List of FAQ's:</p>
+                        <input 
+                        type="text"
+                        className="form-control"
+                        required="true"
+                        id="faq-list"
+                        onChange={createInputBox}
+                        />
+                      </div>
+                      <>
+                      {(()=>{
+                        let rows=[];
+                        for(let i=0;i<faqList;i++){
+                          rows.push(
+                            <>                            
+                            <div className="mb-2">
+                              <textarea
+                              key={i}
+                              type="text"
+                              className="form-control"
+                              required="true"
+                              placeholder={`FAQ's Questions ${i}`}
+                              />
+                            </div>
+                            <div className="mb-2">
+                            <textarea
+                            key={i}
+                            type="text"
+                            className="form-control"
+                            required="true"
+                            placeholder={`FAQ's Answer ${i}`}
+                            />
+                          </div>
+                          </>
+                          );
+                        }
+                        return rows;
+                      })()}
+                      </>
+                      
 
                     <div className="mb-2">
                       <input
