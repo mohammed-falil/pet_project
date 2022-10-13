@@ -40,11 +40,6 @@ let EditCar = () => {
 
         let response = await CarService.getCar(name);
         let carDetails = response.data.allCarDetails[0];
-        // let fuelResponse = await
-        // let steeringResponse = await CarService.getPowerSteeringTypes();
-        // let brakeResponse = await CarService.getBrakeSystemTypes();
-        // let seatResponse = await CarService.getSeatingTypes();
-        // let gearResponse = await CarService.getGearTypes();
 
         setState({
           ...state,
@@ -184,10 +179,10 @@ let EditCar = () => {
                       >
                         <option value="">Power Steering</option>
                         {powersteering.length > 0 &&
-                          powersteering.map((psType) => {
+                          powersteering.map((psType,index) => {
                             return (
-                              <option key={psType.id} value={psType.id}>
-                                {psType.name}
+                              <option key={index} value={psType}>
+                                {psType}
                               </option>
                             );
                           })}
@@ -203,10 +198,10 @@ let EditCar = () => {
                       >
                         <option value="">Break System</option>
                         {brakesystem.length > 0 &&
-                          brakesystem.map((bsType) => {
+                          brakesystem.map((bsType,index) => {
                             return (
-                              <option key={bsType.id} value={bsType.id}>
-                                {bsType.name}
+                              <option key={index} value={bsType}>
+                                {bsType}
                               </option>
                             );
                           })}
@@ -255,10 +250,10 @@ let EditCar = () => {
                       >
                         <option value="">Seating Capacity</option>
                         {seatingcapacity.length > 0 &&
-                          seatingcapacity.map((scType) => {
+                          seatingcapacity.map((scType,index) => {
                             return (
-                              <option key={scType.id} value={scType.id}>
-                                {scType.name}
+                              <option key={index} value={scType}>
+                                {scType}
                               </option>
                             );
                           })}
@@ -274,10 +269,10 @@ let EditCar = () => {
                       >
                         <option value="">Gear Type</option>
                         {geartype.length > 0 &&
-                          geartype.map((gtType) => {
+                          geartype.map((gtType,index) => {
                             return (
-                              <option key={gtType.id} value={gtType.id}>
-                                {gtType.name}
+                              <option key={index} value={gtType}>
+                                {gtType}
                               </option>
                             );
                           })}
