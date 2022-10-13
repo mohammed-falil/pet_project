@@ -1,0 +1,15 @@
+.pros-tag {
+  display: flex;
+  margin-right: 20px;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.pros-tag input {
+  width: 70px;
+  margin-left: 10px;
+}
+
+.pros-tag p{
+   margin-top: 10px;
+}

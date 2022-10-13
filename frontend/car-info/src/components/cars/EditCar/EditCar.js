@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import CarService from "../../cars/CarService";
 import Spinner from "../spinner/Spinner";
-
+import "./editCar.css";
 let EditCar = () => {
   let navigate = useNavigate();
 
   let { carId } = useParams();
+
+  const [numOfPros, setNumOfPros] = useState(1);
 
   let [state, setState] = useState({
     loading: false,
@@ -73,20 +75,18 @@ let EditCar = () => {
     });
   };
 
-  let submitForm = (event) => {
-    async function fetchData() {
-      event.preventDefault();
-      try {
-        let response = await CarService.updateCar(state.car, carId);
-        if (response) {
-          navigate("/cars/list", { replace: true });
-        }
-      } catch (error) {
-        setState({ ...state, errorMessage: error.message });
-        navigate(`/cars/edit/${carId}`, { replace: false });
-      }
+  const createInputBox = (event) => {
+    let inputId = event.target.id;
+    let value = event.target.value;
+    if (inputId === "pros-list") {
+      setNumOfPros(value);
     }
-    fetchData();
+  };
+
+  let submitForm = (event) => {
+    event.preventDefault();
+
+    console.log("inside onSubmitForm: ", state);
   };
 
   let {
@@ -179,7 +179,7 @@ let EditCar = () => {
                       >
                         <option value="">Power Steering</option>
                         {powersteering.length > 0 &&
-                          powersteering.map((psType,index) => {
+                          powersteering.map((psType, index) => {
                             return (
                               <option key={index} value={psType}>
                                 {psType}
@@ -198,7 +198,7 @@ let EditCar = () => {
                       >
                         <option value="">Break System</option>
                         {brakesystem.length > 0 &&
-                          brakesystem.map((bsType,index) => {
+                          brakesystem.map((bsType, index) => {
                             return (
                               <option key={index} value={bsType}>
                                 {bsType}
@@ -250,7 +250,7 @@ let EditCar = () => {
                       >
                         <option value="">Seating Capacity</option>
                         {seatingcapacity.length > 0 &&
-                          seatingcapacity.map((scType,index) => {
+                          seatingcapacity.map((scType, index) => {
                             return (
                               <option key={index} value={scType}>
                                 {scType}
@@ -269,7 +269,7 @@ let EditCar = () => {
                       >
                         <option value="">Gear Type</option>
                         {geartype.length > 0 &&
-                          geartype.map((gtType,index) => {
+                          geartype.map((gtType, index) => {
                             return (
                               <option key={index} value={gtType}>
                                 {gtType}
@@ -278,6 +278,37 @@ let EditCar = () => {
                           })}
                       </select>
                     </div>
+
+                    <div className="mb-2 pros-tag">
+                      <p>Number of Pros :</p>
+                      <input
+                        type="number"
+                        className="form-control"
+                        required="true"
+                        id="pros-list"
+                        onChange={createInputBox}
+                      />
+                    </div>
+                    <>
+                      {(() => {
+                        let rows = [];
+                        for (let i = 0; i < numOfPros; i++) {
+                          rows.push(
+                            <div className="mb-2">
+                              <textarea
+                                key={i}
+                                type="text"
+                                className="form-control"
+                                required="true"
+                                placeholder={`Pros list ${i}`}
+                              />
+                            </div>
+                          );
+                        }
+                        return rows;
+                      })()}
+                    </>
+
                     <div className="mb-2">
                       <input
                         type="submit"
