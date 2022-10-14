@@ -1,62 +1,67 @@
 .pros-tag {
   display: flex;
   margin-right: 30px;
-  justify-content: center !important;
+  justify-content: flex-start !important;
   align-items: center !important;
 }
 .pros-tag input {
   width: 70px;
   margin-left: 10px;
 }
-.pros-tag p{
-   margin-top: 10px;
+.pros-tag p {
+  margin-top: 10px;
 }
-
 
 .cons-tag {
   display: flex;
   margin-right: 20px;
-  justify-content: center !important;
+  justify-content: flex-start !important;
   align-items: center !important;
 }
 .cons-tag input {
   width: 70px;
   margin-left: 10px;
 }
-.cons-tag p{
-   margin-top: 10px;
+.cons-tag p {
+  margin-top: 10px;
 }
-
 
 .img-tag {
   display: flex;
   margin-right: 20px;
-  justify-content: center !important;
+  justify-content: flex-start !important;
   align-items: center !important;
 }
 .img-tag input {
   width: 70px;
   margin-left: 10px;
 }
-.img-tag p{
-   margin-top: 10px;
+.img-tag p {
+  margin-top: 10px;
 }
-
 
 .faq-tag {
   display: flex;
   margin-right: 20px;
-  justify-content: center !important;
+  justify-content: flex-start !important;
   align-items: center !important;
 }
 .faq-tag input {
   width: 70px;
   margin-left: 10px;
 }
-.faq-tag p{
-   margin-top: 10px;
+.faq-tag p {
+  margin-top: 10px;
 }
 
-.container{
+.container {
   width: 100%;
+}
+
+.title {
+  margin-left: 5px;
+}
+
+select {
+  -webkit-appearance: listbox !important;
 }

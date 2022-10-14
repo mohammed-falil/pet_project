@@ -110,7 +110,7 @@ public class AdminController {
         }
     }
 
-    @CrossOrigin(allowedHeaders = "*", origins = "*")
+//    @CrossOrigin(allowedHeaders = "*", origins = "*")
 
     @PostMapping("/car/information")
     public ResponseEntity<?> addCarDetails(@RequestBody CarDetails carDetails, HttpServletRequest request) {
