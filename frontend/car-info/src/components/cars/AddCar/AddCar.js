@@ -199,6 +199,42 @@ let AddCar = () => {
                   placeholder="Company"
                 />
               </div>
+              <div className="mb-2">
+                <h6 className="title">BHP:</h6>
+                <input
+                  required="true"
+                  name="bhp"
+                  value={car.bhp}
+                  onChange={updateInput}
+                  type="text"
+                  className="form-control"
+                  placeholder="BHP"
+                />
+              </div>
+              <div className="mb-2">
+                <h6 className="title">Boot Space:</h6>
+                <input
+                  required="true"
+                  name="bootSpace"
+                  value={car.bootSpace}
+                  onChange={updateInput}
+                  type="text"
+                  className="form-control"
+                  placeholder="Boot Space"
+                />
+              </div> 
+              <div className="mb-2">
+                <h6 className="title">Engine capacity:</h6>
+                <input
+                  required="true"
+                  name="engineCapacity"
+                  value={car.engineCapacity}
+                  onChange={updateInput}
+                  type="text"
+                  className="form-control"
+                  placeholder="Engine Capacity"
+                />
+              </div>   
 
               <div className="mb-2">
                 <h6 className="title">Fuel Type:</h6>
@@ -554,9 +590,9 @@ let AddCar = () => {
                 <input
                   type="submit"
                   className="btn btn-success"
-                  value="Update"
+                  value="Add"
                 />
-                <Link to={"/cars/list"} className="btn btn-dark ms-2">
+                <Link to={"/admin/car-list"} className="btn btn-dark ms-2">
                   Cancel
                 </Link>
               </div>

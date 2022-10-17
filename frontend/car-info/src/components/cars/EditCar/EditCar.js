@@ -235,6 +235,42 @@ let EditCar = () => {
                         placeholder="Company"
                       />
                     </div>
+                    <div className="mb-2">
+                      <h6 className="title">BHP:</h6>
+                      <input
+                        required="true"
+                        name="bhp"
+                        value={car.bhp}
+                        onChange={updateInput}
+                        type="text"
+                        className="form-control"
+                        placeholder="BHP"
+                      />
+                    </div>
+                    <div className="mb-2">
+                      <h6 className="title">Boot Space:</h6>
+                      <input
+                        required="true"
+                        name="bootSpace"
+                        value={car.bootSpace}
+                        onChange={updateInput}
+                        type="text"
+                        className="form-control"
+                        placeholder="BootSpace"
+                      />
+                    </div>
+                    <div className="mb-2">
+                      <h6 className="title">Engine Capacity:</h6>
+                      <input
+                        required="true"
+                        name="engineCapacity"
+                        value={car.engineCapacity}
+                        onChange={updateInput}
+                        type="text"
+                        className="form-control"
+                        placeholder="Engine Capacity"
+                      />
+                    </div>
 
                     <div className="mb-2">
                       <h6 className="title">Fuel Type:</h6>
@@ -572,7 +608,7 @@ let EditCar = () => {
                         className="btn btn-success"
                         value="Update"
                       />
-                      <Link to={"/cars/list"} className="btn btn-dark ms-2">
+                      <Link to={"/admin/car-list"} className="btn btn-dark ms-2">
                         Cancel
                       </Link>
                     </div>
