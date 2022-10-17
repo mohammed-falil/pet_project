@@ -20,7 +20,7 @@ let AddCar = () => {
   const [carImgList, setCarImgList] = useState([]);
   const [carFaqQuestionList, setCarFaqQuestionList] = useState([]);
   const [carFaqAnswerList, setCarFaqAnswerList] = useState([]);
-
+  const [addBtnDisabled, setAddBtnDisbled] = useState(false);
   const [car, setCar] = useState({
     name: "",
     company: "",
@@ -134,18 +134,12 @@ let AddCar = () => {
         answer: carFaqAnswerList[i],
       });
     }
-    // console.log("faqs :", faqs);
-    // console.log("faqList-question: ", carFaqQuestionList);
-    // console.log("ProsList: ", carProsList);
-    // console.log("cosList: ", carConsList);
-    // console.log("imageUrl: ", carImgList);
-    // console.log("faqList: ", faqs);
 
     car.prosList = carProsList;
     car.consList = carConsList;
     car.imageURL = carImgList;
     car.faqList = faqs;
-
+    setAddBtnDisbled(true);
     if (jwtToken !== null) {
       responseFunction(car);
     }
@@ -156,6 +150,7 @@ let AddCar = () => {
     setUpdateResponse(response.data.error);
     if (updateResponse === false) {
       navigate("/admin/car-list");
+      setAddBtnDisbled(false);
     }
   }
   const updateInput = (event) => {
@@ -222,7 +217,7 @@ let AddCar = () => {
                   className="form-control"
                   placeholder="Boot Space"
                 />
-              </div> 
+              </div>
               <div className="mb-2">
                 <h6 className="title">Engine capacity:</h6>
                 <input
@@ -234,7 +229,7 @@ let AddCar = () => {
                   className="form-control"
                   placeholder="Engine Capacity"
                 />
-              </div>   
+              </div>
 
               <div className="mb-2">
                 <h6 className="title">Fuel Type:</h6>
@@ -590,6 +585,7 @@ let AddCar = () => {
                 <input
                   type="submit"
                   className="btn btn-success"
+                  disabled={addBtnDisabled}
                   value="Add"
                 />
                 <Link to={"/admin/car-list"} className="btn btn-dark ms-2">

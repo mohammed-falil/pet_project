@@ -5,10 +5,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import circleDp from "../../assets/man-in-suit-and-tie.png";
 import jwt_decode from "jwt-decode";
+import { Link } from "react-router-dom";
 
-function NavigationBar() {
+function NavigationBar(props) {
   const [searchItems, setSearchItems] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
+  // const [loggedIn, setLoggedIn] = useState(props.loggedIn);
   const [nameFromJwt, setNameFromJwt] = useState("");
   const [border, setBorder] = useState({
     borderRadius: "0.8rem 0rem 0rem 0.8rem",
@@ -28,8 +29,22 @@ function NavigationBar() {
   };
   const navigate = useNavigate();
 
+  const onClickLogOut = () => {
+    sessionStorage.clear();
+    navigate("/");
+    props.setLoggedIn(false);
+  };
+
+  const onClickAdminPage = () => {
+    navigate("/admin/car-list");
+    // <Link to="/admin/car-list" />;
+    console.log("inside onClickAdminPage");
+    // window.location.reload();
+  };
+
   const onClickDiv = (e, index) => {
     navigate("/user/view/" + searchItems[index].name);
+    window.location.reload();
     setSearch(null);
     setBorder({ borderRadius: "0.8rem 0rem 0rem 0.8rem" });
   };
@@ -44,6 +59,8 @@ function NavigationBar() {
     }
   };
 
+  useEffect(() => {}, []);
+
   const searchUrl = "http://localhost:9090/user/search/";
 
   useEffect(() => {
@@ -55,13 +72,13 @@ function NavigationBar() {
 
   useEffect(() => {
     let jwt = sessionStorage.getItem("JWT");
-    console.log("inside useEffect");
     if (jwt !== null) {
       let decodedJwt = jwt_decode(jwt);
       setNameFromJwt(decodedJwt.sub);
-      setLoggedIn(true);
+      props.setLoggedIn(true);
+      console.log("inside useEffect loggedIn");
     }
-  }, [loggedIn]);
+  }, [props.loggedIn]);
 
   return (
     <div className="nav_main">
@@ -110,15 +127,15 @@ function NavigationBar() {
         </div>
       </div>
 
-      {loggedIn ? (
+      {props.loggedIn ? (
         <div className="logged-in-circle">
-          <div className="name">
+          <div className="name" onClick={onClickAdminPage}>
             <h6>{nameFromJwt}</h6>
           </div>
           <div className="circle-div">
             <img src={circleDp} />
           </div>
-          <div className="logout-btn">
+          <div className="logout-btn" onClick={onClickLogOut}>
             <button>Logout</button>
           </div>
         </div>

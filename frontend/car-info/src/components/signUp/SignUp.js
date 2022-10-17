@@ -3,7 +3,7 @@ import "./signUp.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function SignUp() {
+export default function SignUp(props) {
   const initialStateError = {
     name: { required: false },
     role: { required: false },
@@ -59,6 +59,7 @@ export default function SignUp() {
           if (!response.error) {
             sessionStorage.setItem("JWT", "Bearer " + response.data.token);
             navigate("/admin/car-list");
+            props.setLoggedIn(true);
           }
         });
     }

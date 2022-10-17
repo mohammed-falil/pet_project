@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login(props) {
   const navigate = useNavigate();
   const initialStateError = {
     name: { required: false },
@@ -51,6 +51,7 @@ export default function Login() {
         .then((response) => {
           sessionStorage.setItem("JWT", "Bearer " + response.data.token);
           navigate("/admin/car-list");
+          props.setLoggedIn(true);
         });
     }
   }, [loading]);

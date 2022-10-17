@@ -95,7 +95,7 @@ export default class CarService {
 
   static updateCar(car, jwtToken) {
     let dataURL = `${this.serverURL}/admin/car/information`;
-
+    console.log(car);
     return axios.post(dataURL, car, {
       headers: {
         authorization: jwtToken,
