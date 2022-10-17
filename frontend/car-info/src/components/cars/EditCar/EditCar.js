@@ -11,6 +11,9 @@ let EditCar = () => {
 
   let { carId } = useParams();
 
+  const [updateResponse, setUpdateResponse] = useState();
+
+  let jwtToken = sessionStorage.getItem("JWT");
   const [numOfPros, setNumOfPros] = useState(1);
   const [numOfCons, setNumOfCons] = useState(1);
   const [numOfImgs, setNumOfImgs] = useState(1);
@@ -21,7 +24,6 @@ let EditCar = () => {
     car: {
       name: "",
       company: "",
-      photo: "",
       PowerSteering: "",
       fuelType: "",
       brakeSystem: "",
@@ -174,13 +176,19 @@ let EditCar = () => {
 
   let submitForm = (event) => {
     event.preventDefault();
-    let jwtToken = sessionStorage.getItem("JWT");
-    if (jwtToken === null) {
-    } else {
-      let response = CarService.updateCar(car, "Bearer " + jwtToken);
-      console.log("inside onSubmitForm response: ", response);
+
+    if (jwtToken !== null) {
+      responseFunction();
     }
   };
+
+  async function responseFunction() {
+    let response = await CarService.updateCar(car, jwtToken);
+    setUpdateResponse(response.data.error);
+    if (updateResponse === false) {
+      navigate("/admin/car-list");
+    }
+  }
 
   let { loading, car } = state;
 
@@ -227,18 +235,6 @@ let EditCar = () => {
                         placeholder="Company"
                       />
                     </div>
-                    {/* <div className="mb-2">
-                      <h6 className="title">Image URLs:</h6>
-                      <input
-                        required="true"
-                        name="photo"
-                        value={car.photo}
-                        onChange={updateInput}
-                        type="text"
-                        className="form-control"
-                        placeholder="img-url"
-                      />
-                    </div> */}
 
                     <div className="mb-2">
                       <h6 className="title">Fuel Type:</h6>
@@ -581,9 +577,6 @@ let EditCar = () => {
                       </Link>
                     </div>
                   </form>
-                </div>
-                <div className="col-md-6">
-                  <img src={car.photo} className="car-img" alt="car1" />
                 </div>
               </div>
             </div>

@@ -57,7 +57,7 @@ export default function SignUp() {
         })
         .then((response) => {
           if (!response.error) {
-            sessionStorage.setItem("JWT", response.data.token);
+            sessionStorage.setItem("JWT", "Bearer " + response.data.token);
             navigate("/admin/car-list");
           }
         });

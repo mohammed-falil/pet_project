@@ -89,7 +89,7 @@ let CarList = () => {
               <div className="col">
                 <p className="h3 fw-bold">
                   Car Manager
-                  <Link to={"/cars/add"} className="btn btn-primary ms-2">
+                  <Link to={"/admin/add-car"} className="btn btn-primary ms-2">
                     <i className="fa fa-plus-circle me-1" /> New
                   </Link>
                 </p>
@@ -178,7 +178,7 @@ let CarList = () => {
                               </div>
                               <div className="col-md-3 d-flex flex-column align-items-center">
                                 <Link
-                                  to={`/cars/view/${car.id}`}
+                                  to={`/user/view/${car.name}`}
                                   className="btn btn-warning my-1"
                                 >
                                   <i className="fa fa-eye" />

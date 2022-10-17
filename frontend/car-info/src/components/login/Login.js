@@ -49,7 +49,7 @@ export default function Login() {
           password: input.password,
         })
         .then((response) => {
-          sessionStorage.setItem("JWT", response.data.token);
+          sessionStorage.setItem("JWT", "Bearer " + response.data.token);
           navigate("/admin/car-list");
         });
     }
