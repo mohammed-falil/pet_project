@@ -81,10 +81,16 @@ export default class CarService {
     return axios.get(dataURL);
   }
 
-  static createCar(car) {
-    let dataURL = `${this.serverURL}/admin/car/information"`;
+  static createCar(car, jwtToken) {
+    let dataURL = `${this.serverURL}/admin/car/information`;
     console.log(car);
-    // return axios.post(dataURL, car);
+    return axios.post(dataURL, car, {
+      headers: {
+        authorization: jwtToken,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
   }
 
   static updateCar(car, jwtToken) {

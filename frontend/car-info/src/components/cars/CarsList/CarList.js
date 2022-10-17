@@ -27,9 +27,6 @@ let CarList = () => {
           loading: false,
           cars: response.data,
         });
-        // console.log("response data: ", response.data.allCarDetails);
-
-        // response.data.allCarDetails.map((car) => console.log(car));
       } catch (error) {
         setState({
           ...state,
@@ -40,6 +37,10 @@ let CarList = () => {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    console.log("state.car: ", state.cars);
+  }, [state.cars]);
 
   //delete car
   let clickDelete = (carId) => {

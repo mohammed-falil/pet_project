@@ -46,10 +46,15 @@ let AddCar = () => {
   const updateList = (name, id, value) => {
     switch (name) {
       case "prosList":
-        setCarProsList({ ...carProsList, [id]: value });
+        let prosTemp = [...carProsList];
+        prosTemp[id] = value;
+        setCarProsList(prosTemp);
+
         break;
       case "consList":
-        setCarConsList({ ...carConsList, [id]: value });
+        let consTemp = [...carConsList];
+        consTemp[id] = value;
+        setCarConsList(consTemp);
         break;
       case "imgList":
         let newImgUrl = {
@@ -100,7 +105,7 @@ let AddCar = () => {
         rows.push("");
       }
       setCarProsList(rows);
-      setCar({ ...car, prosList: carProsList });
+      setCar({ ...car, prosList: [...carProsList] });
     } else if (elementName === "consList") {
       for (let i = 0; i < count; i++) {
         rows.push("");
@@ -120,10 +125,6 @@ let AddCar = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("carImgList: ", carImgList);
-  }, [carImgList]);
-
   let submitForm = (event) => {
     event.preventDefault();
     let faqs = [];
@@ -133,20 +134,17 @@ let AddCar = () => {
         answer: carFaqAnswerList[i],
       });
     }
-    console.log("faqs :", faqs);
-    console.log("faqList-question: ", carFaqQuestionList);
-    console.log("ProsList: ", carProsList);
-    console.log("cosList: ", carConsList);
-    console.log("imageUrl: ", carImgList);
-    console.log("faqList: ", faqs);
+    // console.log("faqs :", faqs);
+    // console.log("faqList-question: ", carFaqQuestionList);
+    // console.log("ProsList: ", carProsList);
+    // console.log("cosList: ", carConsList);
+    // console.log("imageUrl: ", carImgList);
+    // console.log("faqList: ", faqs);
 
-    setCar({
-      ...car,
-      prosList: carProsList,
-      consList: carConsList,
-      imageUrl: carImgList,
-      faqList: faqs,
-    });
+    car.prosList = carProsList;
+    car.consList = carConsList;
+    car.imageURL = carImgList;
+    car.faqList = faqs;
 
     if (jwtToken !== null) {
       responseFunction(car);
@@ -232,8 +230,8 @@ let AddCar = () => {
                   <option value="" disabled selected>
                     Power Steering
                   </option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
+                  <option value={true}>Yes</option>
+                  <option value={false}>No</option>
                 </select>
               </div>
               <div className="mb-2">
@@ -343,26 +341,26 @@ let AddCar = () => {
                   let rows = [];
 
                   for (let i = 0; i < numOfPros; i++) {
-                    if (car.prosList.length >= i) {
-                      rows.push(
-                        <div className="mb-2">
-                          <textarea
-                            key={i}
-                            type="text"
-                            className="form-control"
-                            required="true"
-                            value={carProsList[i]}
-                            onChange={(e) =>
-                              updateList(e.target.name, i, e.target.value)
-                            }
-                            placeholder={`Pros list ${i + 1}`}
-                            name="prosList"
-                            id={i}
-                          />
-                        </div>
-                      );
-                    }
+                    // if (car.prosList.length >=i) {
+                    rows.push(
+                      <div className="mb-2">
+                        <textarea
+                          key={i}
+                          type="text"
+                          className="form-control"
+                          required="true"
+                          value={carProsList[i]}
+                          onChange={(e) =>
+                            updateList(e.target.name, i, e.target.value)
+                          }
+                          placeholder={`Pros list ${i + 1}`}
+                          name="prosList"
+                          id={i}
+                        />
+                      </div>
+                    );
                   }
+                  // }
                   return rows;
                 })()}
               </>
@@ -384,26 +382,26 @@ let AddCar = () => {
                 let rows = [];
 
                 for (let i = 0; i < numOfCons; i++) {
-                  if (car.consList.length >= i) {
-                    rows.push(
-                      <div className="mb-2">
-                        <textarea
-                          key={i}
-                          type="text"
-                          className="form-control"
-                          required="true"
-                          value={carConsList[i]}
-                          onChange={(e) =>
-                            updateList(e.target.name, i, e.target.value)
-                          }
-                          placeholder={`Cons list ${i + 1}`}
-                          name="consList"
-                          id={i}
-                        />
-                      </div>
-                    );
-                  }
+                  // if (car.consList.length >= i) {
+                  rows.push(
+                    <div className="mb-2">
+                      <textarea
+                        key={i}
+                        type="text"
+                        className="form-control"
+                        required="true"
+                        value={carConsList[i]}
+                        onChange={(e) =>
+                          updateList(e.target.name, i, e.target.value)
+                        }
+                        placeholder={`Cons list ${i + 1}`}
+                        name="consList"
+                        id={i}
+                      />
+                    </div>
+                  );
                 }
+                // }
                 return rows;
               })()}
 
@@ -423,26 +421,26 @@ let AddCar = () => {
                 {(() => {
                   let rows = [];
                   for (let i = 0; i < numOfImgs; i++) {
-                    if (carImgList.length >= i) {
-                      rows.push(
-                        <div className="mb-2">
-                          <textarea
-                            key={i}
-                            type="text"
-                            className="form-control"
-                            required="true"
-                            // value={carImgList[i].imageUrl}
-                            onChange={(e) =>
-                              updateList(e.target.name, i, e.target.value)
-                            }
-                            placeholder={`Image ${i + 1}`}
-                            name="imgList"
-                            id={i}
-                          />
-                        </div>
-                      );
-                    }
+                    // if (carImgList.length >= i) {
+                    rows.push(
+                      <div className="mb-2">
+                        <textarea
+                          key={i}
+                          type="text"
+                          className="form-control"
+                          required="true"
+                          // value={carImgList[i].imageUrl}
+                          onChange={(e) =>
+                            updateList(e.target.name, i, e.target.value)
+                          }
+                          placeholder={`Image ${i + 1}`}
+                          name="imgList"
+                          id={i}
+                        />
+                      </div>
+                    );
                   }
+                  // }
                   return rows;
                 })()}
 
@@ -492,7 +490,7 @@ let AddCar = () => {
               <div className="mb-2 faq-tag">
                 <p>List of FAQ's:</p>
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   required="true"
                   id="faq-list"
