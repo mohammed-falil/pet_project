@@ -20,7 +20,7 @@ public interface AdminService {
 
     CarDetails updateCarDetails(CarDetails carDetails, HttpServletRequest request);
 
-    boolean deleteCarDetails(int id);
+    boolean deleteCarDetails(String name);
 
     List<CarDetails> getcarbyname(String name);
 

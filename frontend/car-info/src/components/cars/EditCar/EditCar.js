@@ -128,6 +128,14 @@ let EditCar = () => {
     }
   };
 
+  useEffect(() => {
+    if (updateResponse === false) {
+      setAddBtnDisbled(false);
+      <Link to="/admin/car-list" />;
+      navigate("/admin/car-list");
+    }
+  }, [updateResponse]);
+
   let submitForm = (event) => {
     event.preventDefault();
     let faqs = [];
@@ -151,12 +159,6 @@ let EditCar = () => {
   async function responseFunction(car) {
     let response = await CarService.updateCar(car, jwtToken);
     setUpdateResponse(response.data.error);
-    // navigate("/admin/car-list");
-    <Link to="/admin/car-list" />;
-
-    if (updateResponse === false) {
-      setAddBtnDisbled(false);
-    }
   }
   const updateInput = (event) => {
     let { name, value } = event.target;

@@ -139,10 +139,10 @@ public class AdminController {
 
     }
 
-    @DeleteMapping("/car/information/{id}")
-    public ResponseEntity<?> deleteCarDetails(@PathVariable int id) {
+    @DeleteMapping("/car/information/{name}")
+    public ResponseEntity<?> deleteCarDetails(@PathVariable String name) {
         try {
-            adminService.deleteCarDetails(id);
+            adminService.deleteCarDetails(name);
             return ResponseEntity.ok(new CarDetailsResponse(false, "Car Details Deleted Successfully", null));
         } catch (Exception e) {
             return ResponseEntity.ok(new CarDetailsResponse(true, "Opps something went wrong", null));

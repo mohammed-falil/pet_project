@@ -24,4 +24,5 @@ public interface CarDetailsDao extends JpaRepository<CarDetails, Integer> {
 
     List<CarDetails> findByNameContaining(String search);
 
+    CarDetails findCar_DetailsByName(String name);
 }

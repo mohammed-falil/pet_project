@@ -110,8 +110,8 @@ public class AdminServiceImpl implements UserDetailsService, AdminService {
     }
 
     @Override
-    public boolean deleteCarDetails(int id) {
-        CarDetails carDetails = carDao.findById(id);
+    public boolean deleteCarDetails(String name) {
+        CarDetails carDetails = carDao.findCar_DetailsByName(name);
         if (carDetails != null) {
             carDao.delete(carDetails);
             return true;

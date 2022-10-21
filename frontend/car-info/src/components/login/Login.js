@@ -1,10 +1,14 @@
 import "./login.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Alert from "react-bootstrap/Alert";
+
 import { useNavigate } from "react-router-dom";
 
 export default function Login(props) {
   const navigate = useNavigate();
+
+  const [updateResponse, setUpdateResponse] = useState();
   const initialStateError = {
     name: { required: false },
     password: { required: false },
@@ -49,13 +53,25 @@ export default function Login(props) {
           password: input.password,
         })
         .then((response) => {
-          sessionStorage.setItem("JWT", "Bearer " + response.data.token);
-          navigate("/admin/car-list");
-          props.setLoggedIn(true);
+          if (response.data.error === false) {
+            sessionStorage.setItem("JWT", "Bearer " + response.data.token);
+          }
+
+          setUpdateResponse(response.data.error);
         });
     }
   }, [loading]);
 
+  useEffect(() => {
+    console.log("updateResponse : ", updateResponse);
+    if (updateResponse === false) {
+      props.setLoggedIn(true);
+      navigate("/admin/car-list");
+    } else if (updateResponse === true) {
+      alert("Invalid username or password");
+      setLoading(false);
+    }
+  }, [updateResponse]);
   return (
     <section className="login-block">
       <div className="container">

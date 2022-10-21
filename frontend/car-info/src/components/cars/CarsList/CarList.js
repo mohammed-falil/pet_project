@@ -5,10 +5,6 @@ import Spinner from "../spinner/Spinner";
 import "./carList.css";
 
 let CarList = () => {
-  // let [query, setQuery] = useState({
-  //   text: "",
-  // });
-
   let [state, setState] = useState({
     loading: true,
     cars: [],
@@ -43,10 +39,11 @@ let CarList = () => {
   }, [state.cars]);
 
   //delete car
-  let clickDelete = (carId) => {
+  let clickDelete = (carName) => {
     async function fetchData() {
       try {
-        let response = await CarService.deleteCar(carId);
+        let jwtToken = sessionStorage.getItem("JWT");
+        let response = await CarService.deleteCar(carName, jwtToken);
         if (response) {
           setState({ ...state, loading: true });
           let response = await CarService.getAllCars();
@@ -103,7 +100,7 @@ let CarList = () => {
               <div className="col-md-6">
                 <form className="row">
                   <div className="col">
-                    <div className="mb-2">
+                    {/* <div className="mb-2">
                       <input
                         name="text"
                         // value={query.text}
@@ -112,9 +109,9 @@ let CarList = () => {
                         className="form-control"
                         placeholder="Search cars"
                       />
-                    </div>
+                    </div> */}
                   </div>
-                  <div className="col">
+                  {/* <div className="col">
                     <div className="mb-2">
                       <input
                         type="submit"
@@ -122,7 +119,7 @@ let CarList = () => {
                         value="Search"
                       />
                     </div>
-                  </div>
+                  </div> */}
                 </form>
               </div>
             </div>
@@ -192,7 +189,7 @@ let CarList = () => {
                                 </Link>
                                 <button
                                   className="btn btn-danger"
-                                  onClick={() => clickDelete(car.id)}
+                                  onClick={() => clickDelete(car.name)}
                                 >
                                   <i className="fa fa-trash" />
                                 </button>

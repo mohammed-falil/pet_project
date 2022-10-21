@@ -105,8 +105,14 @@ export default class CarService {
     });
   }
 
-  static deleteCar(carId) {
-    let dataURL = `${this.serverURL}/cars/${carId}`;
-    return axios.delete(dataURL);
+  static deleteCar(carName, jwtToken) {
+    let dataURL = `${this.serverURL}/admin/car/information/${carName}`;
+    return axios.delete(dataURL, {
+      headers: {
+        authorization: jwtToken,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
   }
 }
