@@ -145,13 +145,18 @@ let AddCar = () => {
     }
   };
 
-  async function responseFunction(car) {
-    let response = await CarService.createCar(car, jwtToken);
-    setUpdateResponse(response.data.error);
+  useEffect(() => {
+    console.log("updateResponse : ", updateResponse);
     if (updateResponse === false) {
       navigate("/admin/car-list");
       setAddBtnDisbled(false);
     }
+  }, [updateResponse]);
+
+  async function responseFunction(car) {
+    let response = await CarService.createCar(car, jwtToken);
+    console.log("response : ", response);
+    setUpdateResponse(response.data.error);
   }
   const updateInput = (event) => {
     let { name, value } = event.target;
