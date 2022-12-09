@@ -491,6 +491,7 @@ let AddCar = () => {
                               className="d-block"
                               src={item.imageUrl}
                               alt="First slide"
+                              style={{ height: "300px", width: "550px" }}
                             />
                           </Carousel.Item>
                         ))
